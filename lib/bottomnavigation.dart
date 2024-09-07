@@ -1,7 +1,8 @@
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:drive2go/account.dart';
 import 'package:drive2go/buycar.dart';
-import 'package:drive2go/mycar.dart';
+import 'package:drive2go/myCar.dart';
+import 'package:drive2go/search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,7 +14,7 @@ class bottomnaviation extends StatefulWidget {
   @override
   State<bottomnaviation> createState() => _bottomnaviationState();
 }
-final screens = [home(),mycar(),buycar(),account(),];
+final screens = [home(),Mycar(),buycar(),account(),];
 int currentIndex = 0;
 class _bottomnaviationState extends State<bottomnaviation> {
   @override
