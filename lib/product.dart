@@ -44,7 +44,7 @@ class _productState extends State<product> {
                     SizedBox(
                       width: 25.w,
                     ),
-                    GestureDetector(onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (_)=>buycar()));},
+                    GestureDetector(onTap: () {Navigator.of(context).pop(MaterialPageRoute(builder: (_)=>buycar()));},
                       child: Icon(
                         CupertinoIcons.back,
                         color: Colors.white,
@@ -519,7 +519,7 @@ class _productState extends State<product> {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
