@@ -86,7 +86,7 @@ class _buycarState extends State<buycar> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Color(0xFF627387),
-                              fontSize: 15,
+                              fontSize: 15.w,
                               fontFamily: 'SF Pro Display',
                               fontWeight: FontWeight.w300,
                               letterSpacing: 1.50.w,
@@ -132,10 +132,9 @@ class _buycarState extends State<buycar> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Color(0xFFF7F5F2),
-                        fontSize: 22,
+                        fontSize: 22.w,
                         fontFamily: 'SF Pro Display',
                         fontWeight: FontWeight.w600,
-                        height: 0,
                       ),
                     ),
                     Text(
