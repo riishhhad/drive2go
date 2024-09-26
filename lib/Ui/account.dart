@@ -19,23 +19,24 @@ class _accountState extends State<account> {
         Container(
           width: 430.w,
           height: 932.h,
-              decoration: BoxDecoration(
-          color: Colors.white
-              ),child: SingleChildScrollView(
-                child: Column(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment(-0.09, 1.00),
+              end: Alignment(0.09, -1),
+              colors: [
+                Colors.black,
+                Color(0xFF272C2F),
+                Color(0xFF525E64),
+                Color(0xFF3B4F58),
+                Color(0xFF01293B)
+              ],
+            ),
+          ),child: SingleChildScrollView(
+                child:
+                Column(
                   children: [
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding:  EdgeInsets.only(left: 26.w,top: 19.h),
-                          child: Icon(CupertinoIcons.back,color: Colors.black,),
-                        ),Padding(
-                          padding:  EdgeInsets.only(right: 18.w,top: 19.h),
-                          child: Icon(Icons.more_vert,color: Colors.black,),
-                        ),
-                      ],
-                    ),Row(
+                    SizedBox( height: 80.h,),
+                 Row(
                       children: [
                         Padding(
                           padding:  EdgeInsets.only(left: 35.w,top: 19.h),
@@ -57,7 +58,7 @@ class _accountState extends State<account> {
                               Text(
                                 'James Robert',
                                 style: TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   fontSize: 16.w,
                                   fontFamily: 'SF Pro Display',
                                   fontWeight: FontWeight.w600,
@@ -66,7 +67,7 @@ class _accountState extends State<account> {
                               Text(
                                 'Individual profile',
                                 style: TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   fontSize: 12.w,
                                   fontFamily: 'SF Pro Display',
                                   fontWeight: FontWeight.w400,
@@ -74,6 +75,9 @@ class _accountState extends State<account> {
                               ),
                             ],
                           ),
+                        ), Padding(
+                          padding:  EdgeInsets.only(left:  140.w,),
+                          child: Icon(Icons.more_vert,color: Colors.white,),
                         ),
                       ],
                     ),SizedBox(height: 11.h,),
@@ -101,12 +105,12 @@ class _accountState extends State<account> {
                     Row(
                       children: [
                         SizedBox(width: 44.w,),
-                        Icon(BootstrapIcons.gear,color: Colors.black,),
+                        Icon(BootstrapIcons.gear,color: Colors.white,),
                         SizedBox(width: 22.w,),
                         Text(
                           'Account Settings',
                           style: TextStyle(
-                            color: Color(0xFF000B17),
+                            color: Colors.white,
                             fontSize: 15.w,
                             fontFamily: 'SF Pro Display',
                             fontWeight: FontWeight.w400,
@@ -123,13 +127,13 @@ class _accountState extends State<account> {
                       padding:  EdgeInsets.only(left: 44.w),
                       child: Row(
                         children: [
-                          Icon(BootstrapIcons.file_check,color: Colors.black,),
+                          Icon(BootstrapIcons.file_check,color: Colors.white,),
                     
                       SizedBox(width: 22.w,),
                           Text(
                             'Request Verification',
                             style: TextStyle(
-                              color: Color(0xFF000B17),
+                              color: Colors.white,
                               fontSize: 15.w,
                               fontFamily: 'SF Pro Display',
                               fontWeight: FontWeight.w400,
@@ -146,12 +150,12 @@ class _accountState extends State<account> {
                     Padding(
                       padding:  EdgeInsets.only(left: 44.w),
                       child: Row(children: [
-                        Icon(BootstrapIcons.pencil_square),
+                        Icon(BootstrapIcons.pencil_square,color: Colors.white,),
                         SizedBox(width: 22.w,),
                         Text(
                           'Edit Profile',
                           style: TextStyle(
-                            color: Color(0xFF000B17),
+                            color: Colors.white,
                             fontSize: 15.w,
                             fontFamily: 'SF Pro Display',
                             fontWeight: FontWeight.w400,
@@ -167,12 +171,12 @@ class _accountState extends State<account> {
                     Padding(
                       padding:  EdgeInsets.only(left: 44.w),
                       child: Row(children: [
-                        Icon(BootstrapIcons.arrow_up_right),
+                        Icon(BootstrapIcons.arrow_up_right,color: Colors.white,),
                         SizedBox(width: 22.w,),
                         Text(
                           'Manage Outgoing Request',
                           style: TextStyle(
-                            color: Color(0xFF000B17),
+                            color: Colors.white,
                             fontSize: 15.w,
                             fontFamily: 'SF Pro Display',
                             fontWeight: FontWeight.w400,
@@ -191,7 +195,7 @@ class _accountState extends State<account> {
                           Text(
                             'General',
                             style: TextStyle(
-                              color: Color(0xFF929191),
+                              color: Colors.white,
                               fontSize: 12.w,
                               fontFamily: 'SF Pro Display',
                               fontWeight: FontWeight.w400,
@@ -203,12 +207,12 @@ class _accountState extends State<account> {
                     Padding(
                       padding:  EdgeInsets.only(left: 44.w),
                       child: Row(children: [
-                        Icon(BootstrapIcons.globe),
+                        Icon(BootstrapIcons.globe,color: Colors.white,),
                         SizedBox(width: 22.w,),
                         Text(
                           'Manage Outgoing Request',
                           style: TextStyle(
-                            color: Color(0xFF000B17),
+                            color: Colors.white,
                             fontSize: 15.w,
                             fontFamily: 'SF Pro Display',
                             fontWeight: FontWeight.w400,
@@ -228,7 +232,7 @@ class _accountState extends State<account> {
                           Text(
                             'Support',
                             style: TextStyle(
-                              color: Color(0xFF929191),
+                              color: Colors.white,
                               fontSize: 12.w,
                               fontFamily: 'SF Pro Display',
                               fontWeight: FontWeight.w400,
@@ -240,12 +244,12 @@ class _accountState extends State<account> {
                     Padding(
                       padding:  EdgeInsets.only(left: 44.w),
                       child: Row(children: [
-                        Icon(BootstrapIcons.question_circle),
+                        Icon(BootstrapIcons.question_circle,color: Colors.white,),
                         SizedBox(width: 22.w,),
                         Text(
                           'Help',
                           style: TextStyle(
-                            color: Color(0xFF000B17),
+                            color: Colors.white,
                             fontSize: 15.w,
                             fontFamily: 'SF Pro Display',
                             fontWeight: FontWeight.w400,
@@ -261,12 +265,12 @@ class _accountState extends State<account> {
                     Padding(
                       padding:  EdgeInsets.only(left: 44.w),
                       child: Row(children: [
-                        Icon(BootstrapIcons.hand_thumbs_up),
+                        Icon(BootstrapIcons.hand_thumbs_up,color: Colors.white,),
                         SizedBox(width: 22.w,),
                         Text(
                           'Feedback',
                           style: TextStyle(
-                            color: Color(0xFF000B17),
+                            color: Colors.white,
                             fontSize: 15.w,
                             fontFamily: 'SF Pro Display',
                             fontWeight: FontWeight.w400,
@@ -282,12 +286,12 @@ class _accountState extends State<account> {
                     Padding(
                       padding:  EdgeInsets.only(left: 44.w),
                       child: Row(children: [
-                        Icon(BootstrapIcons.info_circle),
+                        Icon(BootstrapIcons.info_circle,color: Colors.white,),
                         SizedBox(width: 22.w,),
                         Text(
                           'Request a feature',
                           style: TextStyle(
-                            color: Color(0xFF000B17),
+                            color: Colors.white,
                             fontSize: 15.w,
                             fontFamily: 'SF Pro Display',
                             fontWeight: FontWeight.w400,
@@ -298,12 +302,12 @@ class _accountState extends State<account> {
                     Padding(
                       padding:  EdgeInsets.only(left: 44.w),
                       child: Row(children: [
-                        Icon(BootstrapIcons.share),
+                        Icon(BootstrapIcons.share,color: Colors.white,),
                         SizedBox(width: 22.w,),
                         Text(
                           'Share this App',
                           style: TextStyle(
-                            color: Color(0xFF000B17),
+                            color: Colors.white,
                             fontSize: 15.w,
                             fontFamily: 'SF Pro Display',
                             fontWeight: FontWeight.w400,
@@ -319,12 +323,12 @@ class _accountState extends State<account> {
                     Padding(
                       padding:  EdgeInsets.only(left: 44.w),
                       child: Row(children: [
-                        Icon(BootstrapIcons.google_play),
+                        Icon(BootstrapIcons.google_play,color: Colors.white,),
                         SizedBox(width: 22.w,),
                         Text(
                           'Rate on Google Play',
                           style: TextStyle(
-                            color: Color(0xFF000B17),
+                            color: Colors.white,
                             fontSize: 15.w,
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w400,
@@ -344,7 +348,7 @@ class _accountState extends State<account> {
             Text(
               'Support',
               style: TextStyle(
-                color: Color(0xFF929191),
+                color: Colors.white,
                 fontSize: 12.w,
                 fontFamily: 'SF Pro Display',
                 fontWeight: FontWeight.w400,
@@ -356,12 +360,12 @@ class _accountState extends State<account> {
                     Padding(
                       padding:  EdgeInsets.only(left: 44.w),
                       child: Row(children: [
-                        Icon(CupertinoIcons.lock),
+                        Icon(CupertinoIcons.lock,color: Colors.white,),
                         SizedBox(width: 22.w,),
                         Text(
                           'Privacy Policy',
                           style: TextStyle(
-                            color: Color(0xFF000B17),
+                            color:Colors.white,
                             fontSize: 15.w,
                             fontFamily: 'SF Pro Display',
                             fontWeight: FontWeight.w400,
@@ -377,12 +381,12 @@ class _accountState extends State<account> {
                     Padding(
                       padding:  EdgeInsets.only(left: 44.w),
                       child: Row(children: [
-                        Icon(CupertinoIcons.shield),
+                        Icon(CupertinoIcons.shield,color: Colors.white,),
                         SizedBox(width: 22.w,),
                         Text(
                           'Terms and Conditions',
                           style: TextStyle(
-                            color: Color(0xFF000B17),
+                            color: Colors.white,
                             fontSize: 15.w,
                             fontFamily: 'SF Pro Display',
                             fontWeight: FontWeight.w400,
@@ -397,16 +401,16 @@ class _accountState extends State<account> {
                       ],
                     ),SizedBox(height: 56.h,),
                     Container(
-                      width: 339,
-                      height: 56,
+                      width: 339.w,
+                      height: 56.h,
                       decoration: ShapeDecoration(
-                        color: Color(0xFF000B17),
+                        color: Colors.white,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                       ),child:Center(
                         child: Text(
                         'Log Out',
                         style: TextStyle(
-                          color: Color(0xFFF7F5F2),
+                          color: Colors.black,
                           fontSize: 16.w,
                           fontFamily: 'Inter',
                           fontWeight: FontWeight.w600,

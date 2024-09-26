@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:drive2go/buycar.dart';
-import 'package:drive2go/transaction.dart';
+import 'package:drive2go/Ui/buycar.dart';
+import 'package:drive2go/Ui/transaction.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

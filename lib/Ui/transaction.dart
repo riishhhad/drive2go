@@ -1,4 +1,4 @@
-import 'package:drive2go/product.dart';
+import 'package:drive2go/Ui/product.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

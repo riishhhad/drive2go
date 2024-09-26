@@ -1,6 +1,6 @@
-import 'package:drive2go/product.dart';
-import 'package:drive2go/search.dart';
-import 'package:drive2go/transaction.dart';
+import 'package:drive2go/Ui/product.dart';
+import 'package:drive2go/Ui/search.dart';
+import 'package:drive2go/Ui/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

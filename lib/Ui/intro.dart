@@ -1,4 +1,5 @@
-import 'package:drive2go/sign%20in.dart';
+
+import 'package:drive2go/Ui/sign%20up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -52,7 +53,7 @@ class _introState extends State<intro> {
                   ),
                 ),
                 ),SizedBox( height: 446.h,),
-            GestureDetector(onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (_)=>signin()));},
+            GestureDetector(onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (_)=>signup()));},
               child: Container(
                 width: 332,
                 height: 64,

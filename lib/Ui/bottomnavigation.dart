@@ -1,8 +1,8 @@
 import 'package:bootstrap_icons/bootstrap_icons.dart';
-import 'package:drive2go/account.dart';
-import 'package:drive2go/buycar.dart';
-import 'package:drive2go/myCar.dart';
-import 'package:drive2go/search.dart';
+import 'package:drive2go/Ui/account.dart';
+import 'package:drive2go/Ui/buycar.dart';
+import 'package:drive2go/Ui/myCar.dart';
+import 'package:drive2go/Ui/search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
