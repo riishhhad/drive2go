@@ -19,7 +19,7 @@ class ApiClient {
         response = await post(Uri.parse(url),
             headers: {
               'Accept': 'application/json',
-              'content-Type': 'application/x-www-form-urlencoded',
+              'Content-Type': 'application/json',
             },
             body: body);
 

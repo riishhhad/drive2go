@@ -1,4 +1,5 @@
 import 'package:drive2go/Bloc/Signup/signup_bloc.dart';
+import 'package:drive2go/Bloc/signin/signin_bloc.dart';
 import 'package:drive2go/Ui/bottomnavigation.dart';
 import 'package:drive2go/Ui/intro.dart';
 import 'package:drive2go/Ui/sign%20up.dart';
@@ -6,6 +7,8 @@ import 'package:drive2go/Ui/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../Bloc/nearby/nearby_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,8 +27,18 @@ class MyApp extends StatelessWidget {
         // Use builder only if you need to use library outside ScreenUtilInit context
         builder: (_, child) {
           return
-            BlocProvider(
-              create: (context) => SignupBloc(),
+            MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => SignupBloc(),
+                ),
+                BlocProvider(
+                  create: (context) => SigninBloc(),
+                ),
+                BlocProvider(
+                  create: (context) => NearbyBloc(),
+                ),
+              ],
               child: MaterialApp(
                   title: 'Flutter Demo', debugShowCheckedModeBanner: false,
                   theme: ThemeData(
@@ -48,7 +61,7 @@ class MyApp extends StatelessWidget {
                         seedColor: Colors.deepPurple),
                     useMaterial3: true,
                   ),
-                  home: signin()
+                  home: bottomnaviation()
               ),
             );
         }

@@ -1,8 +1,13 @@
+import 'package:drive2go/Bloc/nearby/nearby_bloc.dart';
+import 'package:drive2go/Repository/Modelclass/nearbyModel.dart';
 import 'package:drive2go/Ui/product.dart';
 import 'package:drive2go/Ui/search.dart';
 import 'package:drive2go/Ui/transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 
 class home extends StatefulWidget {
   const home({super.key});
@@ -12,6 +17,71 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
+  String _location = 'Unknown';
+  bool locationenabled = true;
+  @override
+  void initState() {
+    _getCurrentLocation();
+
+
+    super.initState();
+  }
+
+
+
+  Future<void> _getCurrentLocation() async {
+    try {
+      bool serviceEnabled;
+      LocationPermission permission;
+
+      // Test if location services are enabled.
+      serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) {
+        setState(() {
+          locationenabled = false;
+        });
+        throw ('Location services are disabled.');
+      }
+
+      permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          throw ('Location permissions are denied');
+        }
+      }
+
+      if (permission == LocationPermission.deniedForever) {
+        throw ('Location permissions are permanently denied, we cannot request permissions.');
+      }
+
+      // Get the current position of the device.
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+
+      // Convert the coordinates to a human-readable address.
+      List<Placemark> placemarks =
+      await placemarkFromCoordinates(position.latitude, position.longitude);
+      BlocProvider.of<NearbyBloc>(context).add(Fetchnearbyevent(
+          lat:position.latitude.toString(),
+          long: position.longitude.toString()));
+
+
+      Placemark place = placemarks[0];
+
+      setState(() {
+        _location = place.locality!;
+        print("hello" + _location);
+      });
+
+    } catch (e) {
+      print('Error occurred: $e');
+      // Optionally show an error message to the user here.
+    }
+  }
+
+
+  late List<NearbyModelClass> nearbyvechiledata;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +134,7 @@ class _homeState extends State<home> {
                             height: 7.h,
                           ),
                           Text(
-                            'Malappuram , Kerala',
+                            '$_location',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Color(0xFFF7F5F2),
@@ -117,13 +187,13 @@ class _homeState extends State<home> {
                           'Search your dream car..',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Color(0xFF627387),
+                            color: Colors.white,
                             fontSize: 15,
                             fontFamily: 'SF Pro Display',
                             fontWeight: FontWeight.w300,
                             letterSpacing: 1.50.w,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -188,105 +258,135 @@ class _homeState extends State<home> {
             SizedBox(
               width: double.infinity.w,
               height: 223.h,
-              child: GestureDetector(onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (_)=>product()));},
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 8,
-                  itemBuilder: (BuildContext context, int index) {
-                    return
-                      Container(
-                      width: 185.w,
-                      height: 223.h,
-                      decoration: ShapeDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment(-0.19, 6),
-                          end: Alignment(0.09, -1),
-                          colors: [Color(0x1BFFFFFF), Color(0xFF000C1B)],
-                        ),
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(width: 1, color: Color(0xFF58606A)),
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                      ),
-                      child: Column(
-                        children: [
-                          SizedBox(height: 4.h,),
-                          Container(
-                            width: 177.w,
-                            height: 146.h,
-                            decoration: ShapeDecoration(
-                              image: DecorationImage(
-                                image: AssetImage("assets/audi.png"),
-                                fit: BoxFit.fill,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(8.r),
-                                  topRight: Radius.circular(8.r),
-                                ),
-                              ),
-                            ),
-                          ),SizedBox(height: 13.h,),
-                          Row(
-                            children: [
-                              Padding(
-                                padding:  EdgeInsets.only(left: 9.w),
-                                child: Text(
-                                  'Audi R8 Coupé',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Color(0xFFF7F5F2),
-                                    fontSize: 16.w,
-                                    fontFamily: 'SF Pro Display',
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),SizedBox(height: 6.h,),
-                          Row(
-                            children: [
-                             SizedBox(width: 5.w,),
-                              Container(
-                                width: 40.w,
-                                height: 25.h,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(),
-                                child: Icon(Icons.location_on_outlined,color: Colors.white,),
-                              ),Text(
-                                'Kottakal',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xFFF7F5F2),
-                                  fontSize: 13.w,
-                                  fontFamily: 'SF Pro Display',
-                                  fontWeight: FontWeight.w300,
-                                  letterSpacing: 0.50.w,
-                                ),
-                              ),SizedBox(width: 24.w,),
-                              Text(
-                                '\$ 8000 / day',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xFFFFD66D),
-                                  fontSize: 13.w,
-                                  fontFamily: 'SF Pro Display',
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 0.50.w,
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
+              child: BlocBuilder<NearbyBloc, NearbyState>(
+                builder: (context, state) {
+                  if (state is NearbyBlocLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (state is NearbyBlocError) {
+                    return Center(
+                      child: Text(
+                        "Error",
+                        style: TextStyle(color: Colors.white),
                       ),
                     );
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return SizedBox(
-                      width: 18.w,
-                    );
-                  },
-                ),
+                  }
+                  if (state is NearbyBlocLoaded) {
+
+              nearbyvechiledata=BlocProvider.of<NearbyBloc>(context).nearbymodel;
+                  return ListView.separated(
+
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: nearbyvechiledata.length,
+                                  itemBuilder: (BuildContext context, int index) {
+                                    return
+                                      Container(
+                                      width: 185.w,
+                                      height: 223.h,
+                                      decoration: ShapeDecoration(
+                                        gradient: LinearGradient(
+                                          begin: Alignment(-0.19, 6),
+                                          end: Alignment(0.09, -1),
+                                          colors: [Color(0x1BFFFFFF), Color(0xFF000C1B)],
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          side: BorderSide(width: 1, color: Color(0xFF58606A)),
+                                          borderRadius: BorderRadius.circular(10.r),
+                                        ),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          SizedBox(height: 4.h,),
+                                          Container(
+                                            width: 177.w,
+                                            height: 146.h,
+                                            decoration: ShapeDecoration(
+                                              image: DecorationImage(
+                                               image: NetworkImage(nearbyvechiledata[index].photos![0].toString()),
+                                                fit: BoxFit.fill,
+                                              ),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(8.r),
+                                                  topRight: Radius.circular(8.r),
+                                                ),
+                                              ),
+                                            ),
+                                          ),SizedBox(height: 13.h,),
+                                          Row(
+                                            children: [
+                                              Padding(
+                                                padding:  EdgeInsets.only(left: 9.w),
+                                                child: Text(
+                                                  nearbyvechiledata[index].brand.toString(),
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    color: Color(0xFFF7F5F2),
+                                                    fontSize: 16.w,
+                                                    fontFamily: 'SF Pro Display',
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),SizedBox(height: 6.h,),
+                                          Padding(
+                                            padding:  EdgeInsets.symmetric(horizontal: 5.w),
+                                            child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Row(
+                                                  children: [
+
+                                                    Container(
+                                                      width: 40.w,
+                                                      height: 25.h,
+                                                      clipBehavior: Clip.antiAlias,
+                                                      decoration: BoxDecoration(),
+                                                      child: Icon(Icons.location_on_outlined,color: Colors.white,),
+                                                    ),
+                                                    Text(
+                                                      'jssdfghjk',
+                                                      textAlign: TextAlign.center,
+                                                      style: TextStyle(
+                                                        color: Color(0xFFF7F5F2),
+                                                        fontSize: 13.w,
+                                                        fontFamily: 'SF Pro Display',
+                                                        fontWeight: FontWeight.w300,
+                                                        letterSpacing: 0.50.w,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+
+                                                Text(
+                                                 "${ nearbyvechiledata[index].rentPrice.toString()} /Day",
+
+                                                  style: TextStyle(
+                                                    color: Color(0xFFFFD66D),
+                                                    fontSize: 13.w,
+                                                    fontFamily: 'SF Pro Display',
+                                                    fontWeight: FontWeight.w500,
+                                                    letterSpacing: 0.50.w,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  separatorBuilder: (BuildContext context, int index) {
+                                    return SizedBox(
+                                      width: 18.w,
+                                    );
+                                  },
+                                );}else {
+                    return SizedBox();
+                  }
+                },
               ),
             ),SizedBox(height: 30.h,),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,

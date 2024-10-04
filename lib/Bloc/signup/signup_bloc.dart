@@ -9,7 +9,7 @@ part 'signup_state.dart';
 
 class SignupBloc extends Bloc<SignupEvent, SignupState> {
   late SignupModel signupModel;
-  UserApi signupApi=UserApi();
+  UserMainApi signupApi=UserMainApi();
   SignupBloc() : super(SignupInitial()) {
     on<Fetchsignupevent>((event, emit) async {
       emit (SignupBlocLoading());
