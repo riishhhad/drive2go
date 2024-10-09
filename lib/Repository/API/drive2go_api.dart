@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:drive2go/Repository/Modelclass/AllcarsModel.dart';
 import 'package:drive2go/Repository/Modelclass/SigninModel.dart';
 import 'package:drive2go/Repository/Modelclass/SignupModel.dart';
 import 'package:drive2go/Repository/Modelclass/nearbyModel.dart';
@@ -46,5 +47,17 @@ class UserMainApi {
     Response response = await apiClient.invokeAPI(trendingpath, 'GET',(body),);
 
     return NearbyModelClass.listFromJson(jsonDecode(response.body));
+  }
+  Future<List<AllcarsModel>> getallcars() async {
+    String trendingpath =
+        'http://45.159.221.50:8868/api/get-vehicles';
+    var body = {
+
+    }
+    ;
+    print("hello"+body.toString());
+    Response response = await apiClient.invokeAPI(trendingpath, 'GET',(body),);
+
+    return AllcarsModel.listFromJson(jsonDecode(response.body));
   }
 }
