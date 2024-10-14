@@ -5,14 +5,29 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class product extends StatefulWidget {
-  const product({super.key});
+class rent extends StatefulWidget {
+  final String id;
+  final String carname;
+  final String color;
+  final String price;
+  final List<dynamic> image;
+  final String gearType;
+  final String fuelType;
+  final String noOfSeats;
+  final String rating;
+  final String noOfDoors;
+  final String ownerName;
+  final String ownerPhoneNumber;
+
+
+  const rent({super.key, required this.id, required this.carname, required this.color, required this.price, required this.image, required this.gearType, required this.fuelType, required this.noOfSeats, required this.rating, required this.noOfDoors, required this.ownerName, required this.ownerPhoneNumber});
 
   @override
-  State<product> createState() => _productState();
+  State<rent> createState() => _rentState();
 }
 
-class _productState extends State<product> {
+class _rentState extends State<rent> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +69,7 @@ class _productState extends State<product> {
                       width: 85.w,
                     ),
                     Text(
-                      'Audi R8 Coupe',
+                      widget.carname,
                       style: TextStyle(
                         color: Color(0xFFF7F5F2),
                         fontSize: 24.w,
@@ -73,7 +88,7 @@ class _productState extends State<product> {
                   itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) =>
                       Container(  width: 430.w,
                         height: 313.h,
-                        child: Image.asset('assets/car2.png'),
+                        child: Image.network(widget.image[itemIndex].toString(),fit: BoxFit.fitWidth,),
                       ), options:  CarouselOptions(
                   height: 400.h,
                   aspectRatio: 16/9,
@@ -94,7 +109,7 @@ class _productState extends State<product> {
                   Padding(
                     padding: EdgeInsets.only(left: 28.w),
                     child: Text(
-                    'Audi R8 Coupé',
+                    widget.carname,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Color(0xFFF7F5F2),
@@ -104,10 +119,7 @@ class _productState extends State<product> {
                     ),
                                   ),
                   ),
-                Padding(
-                  padding:  EdgeInsets.only(right: 34.w),
-                  child: Icon(Icons.favorite_border_outlined,color: Colors.white,),
-                ),
+
               ],),Column(children: [
                 Row(
                   children: [
@@ -115,7 +127,7 @@ class _productState extends State<product> {
                     Icon(CupertinoIcons.star_fill,color: Colors.yellow,size: 15,),
                     SizedBox(width: 13.w,),
                     Text(
-                      '4.8 Reviews',
+                      widget.rating,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Color(0xFFF7F5F2),
@@ -196,7 +208,7 @@ class _productState extends State<product> {
                           left: 52.w,
                           top: 10.h,
                           child: Text(
-                            'Tank size',
+                            'Feual type',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Color(0xFFA7B0BB),
@@ -210,7 +222,7 @@ class _productState extends State<product> {
                           left: 52.w,
                           top: 27.h,
                           child: Text(
-                            '74 liters',
+                            widget.fuelType,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.white,
@@ -260,7 +272,7 @@ class _productState extends State<product> {
                           left: 52.w,
                           top: 10.h,
                           child: Text(
-                            'Tank size',
+                            'gear type',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Color(0xFFA7B0BB),
@@ -274,7 +286,7 @@ class _productState extends State<product> {
                           left: 52.w,
                           top: 27.h,
                           child: Text(
-                            '74 liters',
+                            widget.gearType,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.white,
@@ -329,7 +341,7 @@ class _productState extends State<product> {
                           left: 52.w,
                           top: 10.h,
                           child: Text(
-                            'Tank size',
+                            'owner name',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Color(0xFFA7B0BB),
@@ -343,7 +355,7 @@ class _productState extends State<product> {
                           left: 52.w,
                           top: 27.h,
                           child: Text(
-                            '74 liters',
+                           widget.ownerName,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.white,
@@ -393,7 +405,7 @@ class _productState extends State<product> {
                           left: 52.w,
                           top: 10..h,
                           child: Text(
-                            'Tank size',
+                            'noof seats',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Color(0xFFA7B0BB),
@@ -407,7 +419,7 @@ class _productState extends State<product> {
                           left: 52.w,
                           top: 27.h,
                           child: Text(
-                            '74 liters',
+                            widget.noOfSeats,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.white,
@@ -463,7 +475,7 @@ class _productState extends State<product> {
                         TextSpan(
                           children: [
                             TextSpan(
-                              text: '8000\$',
+                              text: widget.price,
                               style: TextStyle(
                                 color: Color(0xFF000B17),
                                 fontSize: 20.w,

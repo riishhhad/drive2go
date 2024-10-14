@@ -49,6 +49,7 @@ dependencies:
   fluttertoast: ^8.2.8
   shared_preferences: ^2.3.2
   http: ^1.2.2
+  date_picker_plus:
 
 dev_dependencies:
   flutter_test:

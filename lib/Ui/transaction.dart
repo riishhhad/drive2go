@@ -1,7 +1,8 @@
-import 'package:drive2go/Ui/product.dart';
+import 'package:drive2go/Ui/rent.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 class transaction extends StatefulWidget {
   const transaction({super.key});
@@ -9,8 +10,38 @@ class transaction extends StatefulWidget {
   @override
   State<transaction> createState() => _transactionState();
 }
-
 class _transactionState extends State<transaction> {
+  TextEditingController _datecontroller = TextEditingController();
+  TextEditingController returndatecontroller = TextEditingController();
+  Future<void> _selectDate() async{
+    DateTime? _picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+    );
+    if (_picked != null )
+      {
+        setState(() {
+          _datecontroller.text =  DateFormat("MM/dd/yyyy").format(_picked);
+        });
+      }
+  }
+  Future<void> rturndate() async{
+    DateTime? _picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+    );
+    if (_picked != null )
+    {
+      setState(() {
+        returndatecontroller.text =  DateFormat("MM/dd/yyyy").format(_picked);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: Container(
@@ -34,7 +65,9 @@ class _transactionState extends State<transaction> {
                 SizedBox(
                   width: 25.w,
                 ),
-                GestureDetector(onTap: () {Navigator.of(context).pop(MaterialPageRoute(builder: (_)=>product()));},
+                GestureDetector(onTap: () {
+                 // Navigator.of(context).pop(MaterialPageRoute(builder: (_)=>rent()));
+                  },
                   child: Icon(
                     CupertinoIcons.back,
                     color: Colors.white,
@@ -152,56 +185,95 @@ class _transactionState extends State<transaction> {
               Row(
                 children: [
                   SizedBox(width: 39.w,),
-                  Container(
-                    width: 148.w,
-                    height: 55.h,
-                    decoration: ShapeDecoration(
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(width: 1, color: Color(0xFF627487)),
-                        borderRadius: BorderRadius.circular(4),
+                  Column(crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 148.w,
+                        height: 55.h,
+                        decoration: ShapeDecoration(
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(width: 1, color: Color(0xFF627487)),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                        ),
+                          child: TextField(style: TextStyle(color: Colors.white),
+                            keyboardType: TextInputType.none,
+                            controller: _datecontroller,
+                          decoration:  InputDecoration(
+                            hintText: 'mm/dd/yyyy',
+                            //filled: true,
+                            hintStyle: TextStyle(color: Colors.white,fontSize: 20.sp),
+
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.blue)
+                            )
+                          ),onTap: (){
+                            _selectDate();
+                          },
+                            //readOnly:   true,
+                          ),
+
+                      ),SizedBox(height: 10.h,),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+
+                        children: [
+                          Icon(Icons.calendar_today,color: Colors.white,size: 14.sp,),SizedBox(width: 10.w,),
+                          Text(
+                            'Pickup Date',
+                            style: TextStyle(
+                              color: Color(0xFF627487),
+                              fontSize: 14.sp,
+                              fontFamily: 'SF Pro Display',
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          //SizedBox(width: 133.w,),
+                          //,SizedBox(width: 39.w,),
+                        ],
                       ),
-                    ),
-                  ),SizedBox(width: 12.w,),
+                    ],
+                  ), SizedBox(width: 12.w,),
                   Icon(Icons.arrow_forward,color: Colors.white,),SizedBox(width: 12.w,),
-                  Container(
-                    width: 148.w,
-                    height: 55.h,
-                    decoration: ShapeDecoration(
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(width: 1, color: Color(0xFF627487)),
-                        borderRadius: BorderRadius.circular(4),
+                  Column(crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 148.w,
+                        height: 55.h,
+                        decoration: ShapeDecoration(
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(width: 1, color: Color(0xFF627487)),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                        ),
                       ),
-                    ),
+                      SizedBox(height: 10.h,),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+
+                        children: [
+                          Icon(Icons.calendar_today,color: Colors.white,size: 14.sp,),SizedBox(width: 10.w,),
+                          Text(
+                            'Return Date',
+                            style: TextStyle(
+                              color: Color(0xFF627487),
+                              fontSize: 14.w,
+                              fontFamily: 'SF Pro Display',
+                              fontWeight: FontWeight.w400,
+                            ),
+                          )
+
+                        ],
+                      ),
+                    ],
                   ),
                 ],
               ),SizedBox(height: 8.h,),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-          
-                children: [
-                  Padding(
-                    padding:  EdgeInsets.only(left: 39.w),
-                    child: Text(
-                      'Pickup Date',
-                      style: TextStyle(
-                        color: Color(0xFF627487),
-                        fontSize: 14.w,
-                        fontFamily: 'SF Pro Display',
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),SizedBox(width: 133.w,),
-                  Text(
-                    'Return Date',
-                    style: TextStyle(
-                      color: Color(0xFF627487),
-                      fontSize: 14.w,
-                      fontFamily: 'SF Pro Display',
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),SizedBox(width: 39.w,),
-                ],
-              ),SizedBox(height: 44.h,),
+
+
               Row(children: [
                 SizedBox(width: 32.w,),
                 Icon(Icons.location_on_outlined,color: Colors.white,),

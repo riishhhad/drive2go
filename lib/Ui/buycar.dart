@@ -1,4 +1,4 @@
-import 'package:drive2go/Ui/product.dart';
+import 'package:drive2go/Ui/rent.dart';
 import 'package:drive2go/Ui/search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -152,7 +152,9 @@ class _buycarState extends State<buycar> {
                 SizedBox(
                   height: 34.h,
                 ),
-                GestureDetector(onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (_)=>product()));},
+                GestureDetector(onTap: () {
+                  //Navigator.of(context).push(MaterialPageRoute(builder: (_)=>rent()));
+                  },
                   child: SizedBox(
                     width: double.infinity.w,
                     height: 223.h,
@@ -283,7 +285,9 @@ class _buycarState extends State<buycar> {
                 ),
                 SizedBox(height: 30.h
                   ,),
-                GestureDetector(onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (_)=>product()));},
+                GestureDetector(onTap: () {
+                 // Navigator.of(context).push(MaterialPageRoute(builder: (_)=>rent()));
+                  },
                   child: SizedBox(
                     width: double.infinity.w,
                     height: 223.h,
@@ -413,7 +417,9 @@ class _buycarState extends State<buycar> {
                   ],
                 ),
                 SizedBox(height: 30.h,),
-                GestureDetector(onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (_)=>product()));},
+                GestureDetector(onTap: () {
+                  //Navigator.of(context).push(MaterialPageRoute(builder: (_)=>rent()));
+                  },
                   child: SizedBox(
                     width: double.infinity.w,
                     height: 223.h,
@@ -553,7 +559,9 @@ class _buycarState extends State<buycar> {
                       ),
                     )
                   ],
-                ),GestureDetector(onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (_)=>product()));},
+                ),GestureDetector(onTap: () {
+                  //Navigator.of(context).push(MaterialPageRoute(builder: (_)=>rent()));
+                  },
                   child: SizedBox(width: double.infinity.w,height: (133*20/2).h,
                     child: GridView.count(physics: NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.vertical,
