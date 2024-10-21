@@ -9,8 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../Bloc/nearby/nearby_bloc.dart';
-
+import 'Bloc/nearby/nearby_bloc.dart';
+TextEditingController pickuplocationcontroller = TextEditingController();
+TextEditingController returnlocationcontroller = TextEditingController();
 void main() {
   runApp(const MyApp());
 }

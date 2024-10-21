@@ -1,13 +1,16 @@
+import 'package:drive2go/Ui/google_map_pickup.dart';
+import 'package:drive2go/Ui/googli_map_return.dart';
 import 'package:drive2go/Ui/rent.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 
 class transaction extends StatefulWidget {
   const transaction({super.key});
 
-  @override
+
   State<transaction> createState() => _transactionState();
 }
 class _transactionState extends State<transaction> {
@@ -28,20 +31,45 @@ class _transactionState extends State<transaction> {
       }
   }
   Future<void> rturndate() async{
-    DateTime? _picked = await showDatePicker(
+    DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
     );
-    if (_picked != null )
+    if (picked != null )
     {
       setState(() {
-        returndatecontroller.text =  DateFormat("MM/dd/yyyy").format(_picked);
+        returndatecontroller.text =  DateFormat("MM/dd/yyyy").format(picked);
       });
     }
   }
 
+  Future<void> _getCurrentLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      print("hello");
+
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: Container(
@@ -86,7 +114,7 @@ class _transactionState extends State<transaction> {
                     letterSpacing: 0.24.w,
                   ),
                 ),
-          
+
               ],
                   ),SizedBox(height: 49.h,),
               Container(
@@ -196,13 +224,13 @@ class _transactionState extends State<transaction> {
                             borderRadius: BorderRadius.circular(4),
                           ),
                         ),
-                          child: TextField(style: TextStyle(color: Colors.white),
+                          child: TextField(style: TextStyle(color: Colors.grey),
                             keyboardType: TextInputType.none,
                             controller: _datecontroller,
                           decoration:  InputDecoration(
                             hintText: 'mm/dd/yyyy',
                             //filled: true,
-                            hintStyle: TextStyle(color: Colors.white,fontSize: 20.sp),
+                            hintStyle: TextStyle(color: Colors.white10,fontSize: 20.sp),
 
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide.none,
@@ -249,6 +277,25 @@ class _transactionState extends State<transaction> {
                             borderRadius: BorderRadius.circular(4),
                           ),
                         ),
+                        child: TextField(style: TextStyle(color: Colors.grey),
+                          keyboardType: TextInputType.none,
+                          controller: returndatecontroller,
+                          decoration:  InputDecoration(
+                              hintText: 'mm/dd/yyyy',
+                              //filled: true,
+                              hintStyle: TextStyle(color: Colors.white10,fontSize: 20.sp),
+
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.blue)
+                              )
+                          ),onTap: (){
+                            rturndate();                          },
+                          //readOnly:   true,
+                        ),
+
                       ),
                       SizedBox(height: 10.h,),
                       Row(
@@ -271,7 +318,7 @@ class _transactionState extends State<transaction> {
                     ],
                   ),
                 ],
-              ),SizedBox(height: 8.h,),
+              ),SizedBox(height: 15.h,),
 
 
               Row(children: [
@@ -294,7 +341,9 @@ class _transactionState extends State<transaction> {
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Enter a search term',
-                    suffixIcon: Icon(CupertinoIcons.map,color: Colors.white,)
+                    suffixIcon:
+                    GestureDetector(onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (_)=>GoogleMapickup()));},
+                    child: Icon(CupertinoIcons.map,color: Colors.white,))
                   ),
                 ),
               ),SizedBox(height: 8.h,),
@@ -318,7 +367,9 @@ class _transactionState extends State<transaction> {
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Enter a search term',
-                      suffixIcon: Icon(CupertinoIcons.map,color: Colors.white,)
+                      suffixIcon:
+                      GestureDetector(onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (_)=>GoogleMapReturn()));},
+                          child: Icon(CupertinoIcons.map,color: Colors.white,))
                   ),
                 ),
               ),SizedBox(height: 8.h,),
