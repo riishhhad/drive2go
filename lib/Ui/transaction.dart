@@ -1,5 +1,7 @@
+import 'package:drive2go/Ui/bottomnavigation.dart';
 import 'package:drive2go/Ui/google_map_pickup.dart';
 import 'package:drive2go/Ui/googli_map_return.dart';
+import 'package:drive2go/Ui/home.dart';
 import 'package:drive2go/Ui/rent.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,12 @@ class transaction extends StatefulWidget {
   State<transaction> createState() => _transactionState();
 }
 class _transactionState extends State<transaction> {
-
+  bool isclicked=false;
+  void change() {
+    setState(() {
+      isclicked=!isclicked;
+    });
+  }
   TextEditingController _datecontroller = TextEditingController();
   TextEditingController returndatecontroller = TextEditingController();
   Future<void> _selectDate() async{
@@ -115,7 +122,13 @@ class _transactionState extends State<transaction> {
       },
     );
   }
+  int _selectedIndex = -1;
 
+  void _onContainerTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -448,38 +461,46 @@ class _transactionState extends State<transaction> {
                       fontSize: 16.w,
                       fontFamily: 'SF Pro Display',
                       fontWeight: FontWeight.w500,
-                    ),
-                  )
+                    )
+                  ),
                 ],
               ),SizedBox(height: 22.h,),
               SizedBox(  width: 352.w,
 
               ),TextButton(
-                onPressed: () {   Razorpay razorpay = Razorpay();
-                var options = {
-                  'key': 'rzp_live_ILgsfZCZoFIKMb',
-                  'amount': 100,
-                  'name': 'Acme Corp.',
-                  'description': 'Fine T-Shirt',
-                  'retry': {'enabled': true, 'max_count': 1},
-                  'send_sms_hash': true,
-                  'prefill': {'contact': '8888888888', 'email': 'test@razorpay.com'},
-                  'external': {
-                    'wallets': ['paytm']
-                  }
-                };
-                razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, handlePaymentErrorResponse);
-                razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlePaymentSuccessResponse);
-                razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, handleExternalWalletSelected);
-                razorpay.open(options); },
-                child:Container(child: Center(child: Text('Razorpay',style: TextStyle(color: Colors.white,fontSize: 60.sp),),),
-                  width: 350.w,height: 60.h,color: CupertinoColors.inactiveGray,
+                onPressed: () => _onContainerTapped(0),
+                child: Container(  width: 352.w,
+                  height: 55.h,
+                  decoration: BoxDecoration(border: Border.all(
+                      color: _selectedIndex == 0 ? Colors.blue : Colors.white)),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 10.w),
+                    child: Row(
+                      children: [
+                        Icon(Icons.credit_card_sharp,color: Colors.white,),
+                        SizedBox(width: 5.w,),
+                        Text('RazrPay',style: TextStyle(color: Colors.white,fontSize: 20.sp),)
+                      ],
+                    ),
+                  ),
                 ),
               ),
               SizedBox(height: 22.h,),
-              Container(  width: 352.w,
-                height: 55.h,
-                decoration: BoxDecoration(border: Border.all(color: Colors.white)),
+              GestureDetector( onTap: () => _onContainerTapped(1),
+                child: Container(  width: 352.w,
+                  height: 55.h,
+                  decoration: BoxDecoration(border: Border.all(color: _selectedIndex == 1 ? Colors.blue :Colors.white)),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 10.w),
+                    child: Row(
+                      children: [
+                        Icon(Icons.price_change_sharp,color: Colors.white,),
+                        SizedBox(width: 5.w,),
+                        Text('Cash',style: TextStyle(color: Colors.white),)
+                      ],
+                    ),
+                  ),
+                ),
               ),SizedBox(height: 34.h,),
               Container(
                 width: 430.w,
@@ -512,38 +533,59 @@ class _transactionState extends State<transaction> {
                             '14 Days - 1,12,000\$',
                             style: TextStyle(
                               color: Color(0xFFF7F5F2),
-                              fontSize: 20,
+                              fontSize: 20.sp,
                               fontFamily: 'SF Pro Display',
                               fontWeight: FontWeight.w700,
-                              height: 0,
                             ),
                           )
                         ],
                       ),SizedBox(width: 33.w,),
-                      Container(
-                        width: 161.w,
-                        height: 50.h,
-                        decoration: ShapeDecoration(
-                          gradient: RadialGradient(
-                            center: Alignment(0.70, 0.62),
-                            radius: 0.01,
-                            colors: [Color(0xFFFFB700), Color(0xFFFFF0C9), Color(0xFFFFDB81), Color(0xFFFFCE50), Color(0xFFD39906)],
+                      GestureDetector(onTap:() {
+if (_selectedIndex==0){
+                        Razorpay razorpay = Razorpay();
+                        var options = {
+                          'key': 'rzp_live_ILgsfZCZoFIKMb',
+                          'amount': 100,
+                          'name': 'Acme Corp.',
+                          'description': 'Fine T-Shirt',
+                          'retry': {'enabled': true, 'max_count': 1},
+                          'send_sms_hash': true,
+                          'prefill': {'contact': '8888888888', 'email': 'test@razorpay.com'},
+                          'external': {
+                            'wallets': ['paytm']
+                          }
+                        };
+                        razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, handlePaymentErrorResponse);
+                        razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlePaymentSuccessResponse);
+                        razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, handleExternalWalletSelected);
+                        razorpay.open(options);
+
+                      }else{Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_)=> bottomnaviation()), (route)=> false);    }},
+                        child: Container(
+                          width: 161.w,
+                          height: 50.h,
+                          decoration: ShapeDecoration(
+                            gradient: RadialGradient(
+                              center: Alignment(0.70, 0.62),
+                              radius: 0.01,
+                              colors: [Color(0xFFFFB700), Color(0xFFFFF0C9), Color(0xFFFFDB81), Color(0xFFFFCE50), Color(0xFFD39906)],
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),child: Center(
+                            child: Text(
+                            'Pay Now ',
+                            style: TextStyle(
+                              color: Color(0xFFF7F5F2),
+                              fontSize: 20.w,
+                              fontFamily: 'SF Pro Display',
+                              fontWeight: FontWeight.w600,
+                            ),
+                            ),
                           ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),child: Center(
-                          child: Text(
-                          'Pay Now ',
-                          style: TextStyle(
-                            color: Color(0xFFF7F5F2),
-                            fontSize: 20.w,
-                            fontFamily: 'SF Pro Display',
-                            fontWeight: FontWeight.w600,
-                          ),
-                                                ),
                         ),
-                      )
+                      ),
                     ],
                   ),
               ),

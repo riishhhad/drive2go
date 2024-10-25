@@ -3,7 +3,11 @@ import 'package:drive2go/Ui/buycar.dart';
 import 'package:drive2go/Ui/transaction.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../Bloc/nearby/nearby_bloc.dart';
+import '../Repository/Modelclass/nearbyModel.dart';
 
 class rent extends StatefulWidget {
   final String id;
@@ -27,6 +31,10 @@ class rent extends StatefulWidget {
 }
 
 class _rentState extends State<rent> {
+  late List<NearbyModelClass> nearbyvechile;
+
+  String _location = 'Unknown';
+  bool locationenabled = true;
 
   @override
   Widget build(BuildContext context) {
@@ -448,7 +456,225 @@ class _rentState extends State<rent> {
                         ),
                   ],
                 ),
-              ),Container(
+              ),SizedBox(height: 23.h,),
+              Container(
+                width: 380.w,
+                height: 91.h,
+                decoration: ShapeDecoration(
+                  color: Color(0xB21C2631),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),child: Row(
+                  children: [
+                    SizedBox(height: 5.h,width: 15.w,),
+                    Image.asset('assets/dp.png',width: 60.w,height: 60.h,),
+                    Column(
+                      children: [
+                        Padding(
+                          padding:  EdgeInsets.only(left:19.w,top: 19.h),
+                          child: Text(
+                            'James Robert',
+                            style: TextStyle(
+                              color: Color(0xFFF7F5F2),
+                              fontSize: 16.sp,
+                              fontFamily: 'SF Pro Display',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),SizedBox(height: 19.h,),
+                        Row(
+                          children: [
+                            Icon(Icons.location_on_outlined,color: Colors.white,),
+                            Text(
+                              'Kottakal',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xFFF7F5F2),
+                                fontSize: 13.sp,
+                                fontFamily: 'SF Pro Display',
+                                fontWeight: FontWeight.w300,
+                                letterSpacing: 0.50,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),SizedBox(width: 80.w,),
+                    Icon(Icons.messenger_outline,color: Colors.white,),
+                    SizedBox(width: 25.w,),
+                    Icon(Icons.phone_in_talk_outlined,color: Colors.white,)
+                  ],
+                ),
+              ),SizedBox(height: 39.h,),
+              Row(
+                children: [
+                  Padding(
+                    padding:  EdgeInsets.only(left: 20.w),
+                    child: Text(
+                      'Recommended for you',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22.sp,
+                        fontFamily: 'SF Pro Display',
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding:  EdgeInsets.only(left: 30.w,top: 10.h),
+                child: SizedBox(
+                  width: double.infinity.w,
+                  height: 223.h,
+                  child: BlocBuilder<NearbyBloc, NearbyState>(
+                    builder: (context, state) {
+                      if (state is NearbyBlocLoading) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      if (state is NearbyBlocError) {
+                        return Center(
+                          child: Text(
+                            "Error",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        );
+                      }
+                      if (state is NearbyBlocLoaded) {
+                        var nearbyvechiledata =
+                            BlocProvider.of<NearbyBloc>(context).nearbymodel;
+                        return ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: nearbyvechiledata.length,
+                          itemBuilder: (BuildContext context, int index) {
+
+                            return  nearbyvechiledata[index].id==widget.id ?SizedBox():
+                            Container(
+                              width: 185.w,
+                              height: 223.h,
+                              decoration: ShapeDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment(-0.19, 6),
+                                  end: Alignment(0.09, -1),
+                                  colors: [Color(0x1BFFFFFF), Color(0xFF000C1B)],
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  side: BorderSide(
+                                      width: 1, color: Color(0xFF58606A)),
+                                  borderRadius: BorderRadius.circular(10.r),
+                                ),
+                              ),
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: 4.h,
+                                  ),
+                                  Container(
+                                    width: 177.w,
+                                    height: 146.h,
+                                    decoration: ShapeDecoration(
+                                      image: DecorationImage(
+                                        image: NetworkImage(nearbyvechiledata[index]
+                                            .photos![0]
+                                            .toString()),
+                                        fit: BoxFit.fill,
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(8.r),
+                                          topRight: Radius.circular(8.r),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 13.h,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 9.w),
+                                        child: Text(
+                                          nearbyvechiledata[index].brand.toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Color(0xFFF7F5F2),
+                                            fontSize: 16.w,
+                                            fontFamily: 'SF Pro Display',
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 6.h,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 5.w),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Container(
+                                              width: 40.w,
+                                              height: 25.h,
+                                              clipBehavior: Clip.antiAlias,
+                                              decoration: BoxDecoration(),
+                                              child: Icon(
+                                                Icons.location_on_outlined,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            Text(
+                                              '$_location',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                color: Color(0xFFF7F5F2),
+                                                fontSize: 13.w,
+                                                fontFamily: 'SF Pro Display',
+                                                fontWeight: FontWeight.w300,
+                                                letterSpacing: 0.50.w,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Text(
+                                          "${nearbyvechiledata[index].rentPrice.toString()} /Day",
+                                          style: TextStyle(
+                                            color: Color(0xFFFFD66D),
+                                            fontSize: 13.w,
+                                            fontFamily: 'SF Pro Display',
+                                            fontWeight: FontWeight.w500,
+                                            letterSpacing: 0.50.w,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) {
+                            return SizedBox(
+                              width: 18.w,
+                            );
+                          },
+                        );
+                      } else {
+                        return SizedBox();
+                      }
+                    },
+                  ),
+                ),
+              ),SizedBox(height: 10.h,),
+              Container(
                 width: 430.w,
                 height: 99.h,
                 child: Stack(
@@ -539,3 +765,5 @@ class _rentState extends State<rent> {
     );
   }
 }
+
+
