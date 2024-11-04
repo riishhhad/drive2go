@@ -23,7 +23,8 @@ class _buycarState extends State<buycar> {
     // TODO: implement initState
     super.initState();
   }
-
+  int high=0;
+int  latest=0;
   late List<BuycarModel> buycardata;
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +67,19 @@ class _buycarState extends State<buycar> {
     BlocProvider
         .of<BuycarBloc>(context)
         .buycarmodel;
-    return Column(
+    for(int i=0;i<buycardata.length;i++){
+      if(buycardata[i].latestModel==true){
+        latest=latest+1;
+      }
+
+    if(buycardata[i].highMilage==true){
+    high=high+1;
+    }}
+    return buycardata.length==0?SizedBox(): Column(
+    children: [
+    latest == 0
+    ? SizedBox()
+   : Column(
     children: [
                   SizedBox(
                     height: 37.h,
@@ -465,7 +478,7 @@ class _buycarState extends State<buycar> {
                                     height: 146.h,
                                     decoration: ShapeDecoration(
                                       image: DecorationImage(
-                                        image: AssetImage("assets/ferari.png"),
+                                        image: NetworkImage(buycardata[index].highMilage!.toString()),
                                         fit: BoxFit.fill,
                                       ),
                                       shape: RoundedRectangleBorder(
@@ -481,7 +494,7 @@ class _buycarState extends State<buycar> {
                                       Padding(
                                         padding:  EdgeInsets.only(left: 9.w),
                                         child: Text(
-                                          'Audi R8 Coupé',
+                                          buycardata[index].brand.toString(),
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             color: Color(0xFFF7F5F2),
@@ -514,7 +527,7 @@ class _buycarState extends State<buycar> {
                                         ),
                                       ),SizedBox(width: 24.w,),
                                       Text(
-                                        '\$ 8000 / day',
+                                       '${buycardata[index].rentPrice.toString()}/day' ,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           color: Color(0xFFFFD66D),
@@ -607,7 +620,7 @@ class _buycarState extends State<buycar> {
                                   height: 146.h,
                                   decoration: ShapeDecoration(
                                     image: DecorationImage(
-                                      image: AssetImage("assets/car.png"),
+                                      image: NetworkImage(buycardata[index].photos!.toString()),
                                       fit: BoxFit.fill,
                                     ),
                                     shape: RoundedRectangleBorder(
@@ -676,13 +689,15 @@ class _buycarState extends State<buycar> {
                     ),
                   ),
                   SizedBox(height: 40.h,)
-                ]);
+                ]
+    )
+    ]);
     }
     else {
       return SizedBox();}
   },
 )
-              
+
             ),
           ),
         ));

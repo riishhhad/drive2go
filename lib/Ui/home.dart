@@ -226,29 +226,6 @@ class _homeState extends State<home> {
                 SizedBox(
                   height: 34.h,
                 ),
-                SizedBox(
-                  width: double.infinity.w,
-                  height: 78.h,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 8,
-                    itemBuilder: (BuildContext context, int index) {
-                      return CircleAvatar(
-                        radius: 35.r,
-                        backgroundColor: Colors.black,
-                        backgroundImage: AssetImage("assets/toyota.png"),
-                      );
-                    },
-                    separatorBuilder: (BuildContext context, int index) {
-                      return SizedBox(
-                        width: 15.w,
-                      );
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: 28.h,
-                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
