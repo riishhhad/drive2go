@@ -81,9 +81,7 @@ int  latest=0;
     ? SizedBox()
    : Column(
     children: [
-                  SizedBox(
-                    height: 37.h,
-                  ),
+
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -145,10 +143,6 @@ int  latest=0;
                       SizedBox(width:50.w, child: Image.asset('assets/menu.png')),
                     ],
                   ),
-                  SizedBox(
-                    height: 34.h,
-                  ),
-
                   SizedBox(
                     height: 28.h,
                   ),
@@ -262,7 +256,7 @@ int  latest=0;
                                         ),
                                       ),SizedBox(width: 24.w,),
                                       Text(
-                                        buycardata[index].rentPrice.toString(),
+                                        '${buycardata[index].rentPrice.toString()}/day',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           color: Color(0xFFFFD66D),
@@ -395,7 +389,7 @@ int  latest=0;
                                         ),
                                       ),SizedBox(width: 24.w,),
                                       Text(
-                                       buycardata[index].rentPrice.toString(),
+                                        '${buycardata[index].rentPrice.toString()}/day',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           color: Color(0xFFFFD66D),
@@ -445,110 +439,106 @@ int  latest=0;
                     ],
                   ),
                   SizedBox(height: 30.h,),
-                  GestureDetector(onTap: () {
-                    //Navigator.of(context).push(MaterialPageRoute(builder: (_)=>rent()));
-                    },
-                    child: SizedBox(
-                      width: double.infinity.w,
-                      height: 223.h,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 8,
-                        itemBuilder: (BuildContext context, int index) {
-                          return
-                            Container(
-                              width: 185.w,
-                              height: 223.h,
-                              decoration: ShapeDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment(-0.19, 6),
-                                  end: Alignment(0.09, -1),
-                                  colors: [Color(0x1BFFFFFF), Color(0xFF000C1B)],
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  side: BorderSide(width: 1, color: Color(0xFF58606A)),
-                                  borderRadius: BorderRadius.circular(10.r),
-                                ),
+                  SizedBox(
+                    width: double.infinity.w,
+                    height: 223.h,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 8,
+                      itemBuilder: (BuildContext context, int index) {
+                        return
+                          Container(
+                            width: 185.w,
+                            height: 223.h,
+                            decoration: ShapeDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment(-0.19, 6),
+                                end: Alignment(0.09, -1),
+                                colors: [Color(0x1BFFFFFF), Color(0xFF000C1B)],
                               ),
-                              child: Column(
-                                children: [
-                                  SizedBox(height: 4.h,),
-                                  Container(
-                                    width: 177.w,
-                                    height: 146.h,
-                                    decoration: ShapeDecoration(
-                                      image: DecorationImage(
-                                        image: NetworkImage(buycardata[index].highMilage!.toString()),
-                                        fit: BoxFit.fill,
-                                      ),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(8.r),
-                                          topRight: Radius.circular(8.r),
-                                        ),
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(width: 1, color: Color(0xFF58606A)),
+                                borderRadius: BorderRadius.circular(10.r),
+                              ),
+                            ),
+                            child: Column(
+                              children: [
+                                SizedBox(height: 4.h,),
+                                Container(
+                                  width: 177.w,
+                                  height: 146.h,
+                                  decoration: ShapeDecoration(
+                                    image: DecorationImage(
+                                      image: NetworkImage(buycardata[index].photos![2].toString()),
+                                      fit: BoxFit.fill,
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(8.r),
+                                        topRight: Radius.circular(8.r),
                                       ),
                                     ),
-                                  ),SizedBox(height: 13.h,),
-                                  Row(
-                                    children: [
-                                      Padding(
-                                        padding:  EdgeInsets.only(left: 9.w),
-                                        child: Text(
-                                          buycardata[index].brand.toString(),
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            color: Color(0xFFF7F5F2),
-                                            fontSize: 16.w,
-                                            fontFamily: 'SF Pro Display',
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),SizedBox(height: 6.h,),
-                                  Row(
-                                    children: [
-                                      SizedBox(width: 5.w,),
-                                      Container(
-                                        width: 40.w,
-                                        height: 25.h,
-                                        clipBehavior: Clip.antiAlias,
-                                        decoration: BoxDecoration(),
-                                        child: Icon(Icons.location_on_outlined,color: Colors.white,),
-                                      ),Text(
-                                        'Kottakal',
+                                  ),
+                                ),SizedBox(height: 13.h,),
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding:  EdgeInsets.only(left: 9.w),
+                                      child: Text(
+                                        buycardata[index].brand.toString(),
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           color: Color(0xFFF7F5F2),
-                                          fontSize: 13.w,
-                                          fontFamily: 'SF Pro Display',
-                                          fontWeight: FontWeight.w300,
-                                          letterSpacing: 0.50.w,
-                                        ),
-                                      ),SizedBox(width: 24.w,),
-                                      Text(
-                                       '${buycardata[index].rentPrice.toString()}/day' ,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Color(0xFFFFD66D),
-                                          fontSize: 13.w,
+                                          fontSize: 16.w,
                                           fontFamily: 'SF Pro Display',
                                           fontWeight: FontWeight.w500,
-                                          letterSpacing: 0.50.w,
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            );
-                        },
-                        separatorBuilder: (BuildContext context, int index) {
-                          return SizedBox(
-                            width: 18.w,
+                                      ),
+                                    ),
+                                  ],
+                                ),SizedBox(height: 6.h,),
+                                Row(
+                                  children: [
+                                    SizedBox(width: 5.w,),
+                                    Container(
+                                      width: 40.w,
+                                      height: 25.h,
+                                      clipBehavior: Clip.antiAlias,
+                                      decoration: BoxDecoration(),
+                                      child: Icon(Icons.location_on_outlined,color: Colors.white,),
+                                    ),Text(
+                                      'Kottakal',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Color(0xFFF7F5F2),
+                                        fontSize: 13.w,
+                                        fontFamily: 'SF Pro Display',
+                                        fontWeight: FontWeight.w300,
+                                        letterSpacing: 0.50.w,
+                                      ),
+                                    ),SizedBox(width: 24.w,),
+                                    Text(
+                                     '${buycardata[index].rentPrice.toString()}/day',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Color(0xFFFFD66D),
+                                        fontSize: 13.w,
+                                        fontFamily: 'SF Pro Display',
+                                        fontWeight: FontWeight.w500,
+                                        letterSpacing: 0.50.w,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
                           );
-                        },
-                      ),
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return SizedBox(
+                          width: 18.w,
+                        );
+                      },
                     ),
                   ),
                   SizedBox(height: 30.h,),
@@ -620,7 +610,7 @@ int  latest=0;
                                   height: 146.h,
                                   decoration: ShapeDecoration(
                                     image: DecorationImage(
-                                      image: NetworkImage(buycardata[index].photos!.toString()),
+                                      image: NetworkImage(buycardata[index].photos![2].toString()),
                                       fit: BoxFit.fill,
                                     ),
                                     shape: RoundedRectangleBorder(
@@ -636,7 +626,7 @@ int  latest=0;
                                     Padding(
                                       padding:  EdgeInsets.only(left: 9.w),
                                       child: Text(
-                                        'Audi R8 Coupé',
+                                        buycardata[index].brand.toString(),
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           color: Color(0xFFF7F5F2),
@@ -669,7 +659,7 @@ int  latest=0;
                                       ),
                                     ),SizedBox(width: 24.w,),
                                     Text(
-                                      '\$ 8000 / day',
+                                      '${buycardata[index].rentPrice.toString()}/day',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: Color(0xFFFFD66D),

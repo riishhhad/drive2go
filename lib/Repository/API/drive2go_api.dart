@@ -4,6 +4,7 @@ import 'package:drive2go/Repository/Modelclass/BuycarModel.dart';
 import 'package:drive2go/Repository/Modelclass/SigninModel.dart';
 import 'package:drive2go/Repository/Modelclass/SignupModel.dart';
 import 'package:drive2go/Repository/Modelclass/nearbyModel.dart';
+import 'package:drive2go/Repository/Modelclass/searchModel.dart';
 import 'package:http/http.dart';
 import 'api_client.dart';
 
@@ -72,6 +73,18 @@ class UserMainApi {
     Response response = await apiClient.invokeAPI(trendingpath, 'GET',(body),);
 
     return BuycarModel.listFromJson(jsonDecode(response.body));
+  }
+  Future<List<SearchModel>> getsearch(String brandname) async {
+    String trendingpath =
+        'http://45.159.221.50:8868/api/search-buyvehicles?brand=$brandname';
+    var body = {
+
+    }
+    ;
+    print("hello"+body.toString());
+    Response response = await apiClient.invokeAPI(trendingpath, 'GET',(body),);
+
+    return SearchModel.listFromJson(jsonDecode(response.body));
   }
 }
 
