@@ -1,3 +1,4 @@
+import 'package:drive2go/Repository/Modelclass/mycarModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -9,6 +10,7 @@ class Mycar extends StatefulWidget {
 }
 
 class _MycarState extends State<Mycar> {
+  late List<MycarModel> mycar;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

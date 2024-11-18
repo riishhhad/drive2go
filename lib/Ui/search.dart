@@ -17,7 +17,7 @@ class _SearchState extends State<Search> {
   late List<SearchModel> searchcardata;
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor:Colors.black,title:  Container(
+      appBar: AppBar(backgroundColor:Colors.black, title:  Container(
         width: 292.w,
         height: 48.h,
         decoration: ShapeDecoration(
@@ -32,15 +32,19 @@ class _SearchState extends State<Search> {
           ),
         ),
         child:
-        TextFormField(style:TextStyle(color: Colors.white,),onChanged: (value) {
-          setState(() {
-            BlocProvider.of<SearchBloc>(context).add(
-                FetchsearchEvent(brandsearch: search.text));
-          });
-        },
-          decoration:
-          InputDecoration(hintText: 'What are you looking for..',hintStyle: TextStyle(color: Colors.white),
-            icon:Icon(Icons.search,color: Colors.white,),
+        SizedBox(width: 248.w,
+          child: TextFormField(
+            style:TextStyle(color: Colors.white,),onChanged: (value) {
+            setState(() {
+              BlocProvider.of<SearchBloc>(context).add(
+                  FetchsearchEvent(brandsearch: search.text));
+            });
+          },
+            decoration:
+            InputDecoration(hintText: 'What are you looking for..',
+              hintStyle: TextStyle(color: Colors.white),
+              icon:Icon(Icons.search,color: Colors.white,),
+            ),
           ),
         ),
       ),),
@@ -237,7 +241,7 @@ class _SearchState extends State<Search> {
                                                   ),
                                                 ),SizedBox(width: 24.w,),
                                                 Text(
-                                                  '\$ 8000 / day',
+                                                  '${searchcardata[index].rentPrice.toString()}/day',
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                     color: Color(0xFFFFD66D),

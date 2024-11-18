@@ -3,6 +3,7 @@ import 'package:drive2go/Repository/Modelclass/AllcarsModel.dart';
 import 'package:drive2go/Repository/Modelclass/BuycarModel.dart';
 import 'package:drive2go/Repository/Modelclass/SigninModel.dart';
 import 'package:drive2go/Repository/Modelclass/SignupModel.dart';
+import 'package:drive2go/Repository/Modelclass/mycarModel.dart';
 import 'package:drive2go/Repository/Modelclass/nearbyModel.dart';
 import 'package:drive2go/Repository/Modelclass/searchModel.dart';
 import 'package:http/http.dart';
@@ -85,6 +86,18 @@ class UserMainApi {
     Response response = await apiClient.invokeAPI(trendingpath, 'GET',(body),);
 
     return SearchModel.listFromJson(jsonDecode(response.body));
+  }
+  Future<List<MycarModel>> getmycar() async {
+    String trendingpath =
+        'http://45.159.221.50:8868/api/get-buy-orders/66ceb30f2dc300b0b85f6244';
+    var body = {
+
+    }
+    ;
+    print("hello"+body.toString());
+    Response response = await apiClient.invokeAPI(trendingpath, 'GET',(body),);
+
+    return MycarModel.listFromJson(jsonDecode(response.body));
   }
 }
 
