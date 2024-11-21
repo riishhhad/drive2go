@@ -59,7 +59,7 @@ class _MycarState extends State<Mycar> {
                   child:Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5
                     ),
-                    child: Container(child:BlocBuilder<MycarBloc, MycarState>(
+                    child: Container(width: double.infinity.w,color: Colors.black,child:BlocBuilder<MycarBloc, MycarState>(
   builder: (context, state) {
     if (state is MycarBlocLoading) {
       return Center(
@@ -101,7 +101,7 @@ class _MycarState extends State<Mycar> {
                 ),
               ), child: Row(
               children: [
-                Image.network(mycar[index].vehicle!.photos![0]),
+                mycar[index].vehicle==null?SizedBox(): Image.network(mycar[index].vehicle!.photos![0]),
                 Padding(
                   padding: EdgeInsets.only(left: 20),
                   child: Container(
@@ -181,7 +181,6 @@ class _MycarState extends State<Mycar> {
   }
   }
   ),
-                      width: double.infinity.w,color: Colors.black,
                     ),
                   )
                 ),

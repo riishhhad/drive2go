@@ -80,68 +80,8 @@ class _accountState extends State<account> {
                           child: Icon(Icons.more_vert,color: Colors.white,),
                         ),
                       ],
-                    ),SizedBox(height: 11.h,),
-                    Column(
-                      children: [
-                        SizedBox(width: 318.w,
-                            child: Divider(color: Color(0xFFB5B1B1),thickness: 1,)),
-                      ],
-                    ),Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: 33.w,top: 23.h),
-                          child: Text(
-                            'Account settings',
-                            style: TextStyle(
-                              color: Color(0xFF929191),
-                              fontSize: 12.w,
-                              fontFamily: 'SF Pro Display',
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),SizedBox(height: 19.h,),
-                    Row(
-                      children: [
-                        SizedBox(width: 44.w,),
-                        Icon(BootstrapIcons.gear,color: Colors.white,),
-                        SizedBox(width: 22.w,),
-                        Text(
-                          'Account Settings',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15.w,
-                            fontFamily: 'SF Pro Display',
-                            fontWeight: FontWeight.w400,
-                          ),
-                        )
-                      ],
-                    ),  Column(
-                      children: [
-                        SizedBox(width: 370.w,
-                            child: Divider(color: Color(0xFFB5B1B1),thickness: 0.5,)),
-                      ],
-                    ),SizedBox(height: 19.h,),
-                    Padding(
-                      padding:  EdgeInsets.only(left: 44.w),
-                      child: Row(
-                        children: [
-                          Icon(BootstrapIcons.file_check,color: Colors.white,),
-                    
-                      SizedBox(width: 22.w,),
-                          Text(
-                            'Request Verification',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15.w,
-                              fontFamily: 'SF Pro Display',
-                              fontWeight: FontWeight.w400,
-                            ),
-                          )
-                                      ],
-                                    ),
-                    ),Column(
+                    ),
+             Column(
                       children: [
                         SizedBox(width: 370.w,
                             child: Divider(color: Color(0xFFB5B1B1),thickness: 0.5,)),
@@ -168,63 +108,6 @@ class _accountState extends State<account> {
                             child: Divider(color: Color(0xFFB5B1B1),thickness: 0.5,)),
                       ],
                     ),SizedBox(height: 19.h,),
-                    Padding(
-                      padding:  EdgeInsets.only(left: 44.w),
-                      child: Row(children: [
-                        Icon(BootstrapIcons.arrow_up_right,color: Colors.white,),
-                        SizedBox(width: 22.w,),
-                        Text(
-                          'Manage Outgoing Request',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15.w,
-                            fontFamily: 'SF Pro Display',
-                            fontWeight: FontWeight.w400,
-                          ),
-                        )
-                      ],),
-                    ), Column(
-                      children: [
-                        SizedBox(width: 370.w,
-                            child: Divider(color: Color(0xFFB5B1B1),thickness: 0.5,)),
-                      ],
-                    ),Padding(
-                      padding:  EdgeInsets.only(left: 25.w,top: 23.h),
-                      child: Row(
-                        children: [
-                          Text(
-                            'General',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12.w,
-                              fontFamily: 'SF Pro Display',
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),SizedBox(height: 19.h,),
-                    Padding(
-                      padding:  EdgeInsets.only(left: 44.w),
-                      child: Row(children: [
-                        Icon(BootstrapIcons.globe,color: Colors.white,),
-                        SizedBox(width: 22.w,),
-                        Text(
-                          'Manage Outgoing Request',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15.w,
-                            fontFamily: 'SF Pro Display',
-                            fontWeight: FontWeight.w400,
-                          ),
-                        )
-                      ],),
-                    ), Column(
-                      children: [
-                        SizedBox(width: 370.w,
-                            child: Divider(color: Color(0xFFB5B1B1),thickness: 0.5,)),
-                      ],
-                    ),SizedBox(height: 23.44.h,),
                     Padding(
                       padding:  EdgeInsets.only(left: 25.w),
                       child: Row(
@@ -283,64 +166,7 @@ class _accountState extends State<account> {
                             child: Divider(color: Color(0xFFB5B1B1),thickness: 0.5,)),
                       ],
                     ),SizedBox(height: 19.h,),
-                    Padding(
-                      padding:  EdgeInsets.only(left: 44.w),
-                      child: Row(children: [
-                        Icon(BootstrapIcons.info_circle,color: Colors.white,),
-                        SizedBox(width: 22.w,),
-                        Text(
-                          'Request a feature',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15.w,
-                            fontFamily: 'SF Pro Display',
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ],),
-                    ),SizedBox(height: 19.h,),
-                    Padding(
-                      padding:  EdgeInsets.only(left: 44.w),
-                      child: Row(children: [
-                        Icon(BootstrapIcons.share,color: Colors.white,),
-                        SizedBox(width: 22.w,),
-                        Text(
-                          'Share this App',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15.w,
-                            fontFamily: 'SF Pro Display',
-                            fontWeight: FontWeight.w400,
-                          ),
-                        )
-                      ],),
-                    ),Column(
-                      children: [
-                        SizedBox(width: 370.w,
-                            child: Divider(color: Color(0xFFB5B1B1),thickness: 0.5,)),
-                      ],
-                    ),SizedBox(height: 19.h,),
-                    Padding(
-                      padding:  EdgeInsets.only(left: 44.w),
-                      child: Row(children: [
-                        Icon(BootstrapIcons.google_play,color: Colors.white,),
-                        SizedBox(width: 22.w,),
-                        Text(
-                          'Rate on Google Play',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15.w,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w400,
-                          ),
-                        )
-                      ],),
-                    ),Column(
-                      children: [
-                        SizedBox(width: 370.w,
-                            child: Divider(color: Color(0xFFB5B1B1),thickness: 0.5,)),
-                      ],
-                    ),SizedBox(height: 23.44.h,),
+
       Padding(
         padding:  EdgeInsets.only(left: 25.w),
         child: Row(
@@ -399,7 +225,7 @@ class _accountState extends State<account> {
                         SizedBox(width: 370.w,
                             child: Divider(color: Color(0xFFB5B1B1),thickness: 0.5,)),
                       ],
-                    ),SizedBox(height: 56.h,),
+                    ),SizedBox(height: 110.h,),
                     Container(
                       width: 339.w,
                       height: 56.h,
